@@ -239,4 +239,34 @@ Blockly.Blocks['nb_upload'] = {
     this.setNextStatement(true, null);
     this.setTooltip('Delay specific time');
   }
-};
+  
+  };
+  Blockly.Blocks['nb_add_obj'] = {
+    init: function() {
+      this.setColour(190);
+      this.appendValueInput("NB_ADD_OBJ", 'Number')
+          .appendField("NB模块添加对象")
+          .setCheck('Number');
+      
+      this.setInputsInline(true);
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setTooltip('Delay specific time');
+    }
+  };
+
+  Blockly.Blocks['nb_add_attr'] = {
+    init: function() {
+      this.setColour(190);
+      this.appendValueInput("NB_ADD_ATTR_OBJ", 'Number')
+          .appendField("NB模块添加属性   对象")
+          .setCheck('Number');
+      this.appendValueInput("NB_ADD_ATTR_ATTR", 'Number')
+          .appendField("属性")
+          .setCheck('Number');
+      this.setInputsInline(true);
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setTooltip('Delay specific time');
+    }
+  };

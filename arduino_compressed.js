@@ -170,3 +170,32 @@ Blockly.Arduino.nb_register = function() {
     '}\n';
     return code;
   };
+
+  Blockly.Arduino.nb_add_obj= function() {
+    var obj = Blockly.Arduino.valueToCode(this, 'NB_ADD_OBJ', Blockly.Arduino.ORDER_ATOMIC);
+    Blockly.Arduino.setups_['setup_nb_add_obj_'] = 'Serial2.print("AT+MIPLADDOBJ=0,'+obj+',0\\r\\n");\n'+
+    'delay(100);\n'+
+    'if (Serial2.available()>0) {\n'+
+    'String Byte1 = Serial2.readString();\n'+
+    'delay(50);\n'+
+    'Serial1.print(Byte1);\n'+
+    'delay(50);\n'+
+    '}\n';
+    var code = '';
+    return code;
+  };
+
+  Blockly.Arduino.nb_add_attr = function() {
+    var obj = Blockly.Arduino.valueToCode(this, 'NB_ADD_ATTR_OBJ', Blockly.Arduino.ORDER_ATOMIC);
+    var attr = Blockly.Arduino.valueToCode(this, 'NB_ADD_ATTR_ATTR', Blockly.Arduino.ORDER_ATOMIC);
+    Blockly.Arduino.setups_['setup_nb_add_attr_'] = 'Serial2.print("AT+MIPLNOTIFY=0,'+obj+',0,'+attr+',3,\\"0\\",0\\r\\n");\n'+
+    'delay(100);\n'+
+    'if (Serial2.available()>0) {\n'+
+    'String Byte1 = Serial2.readString();\n'+
+    'delay(50);\n'+
+    'Serial1.print(Byte1);\n'+
+    'delay(50);\n'+
+    '}\n';
+    var code = '';
+    return code;
+  };
