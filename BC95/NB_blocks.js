@@ -26,7 +26,7 @@ Blockly.Blocks['bc_nb_init'] = {
     this.setColour(230);
     this.appendDummyInput()
         .appendField("NB模块初始化")
-    this.setPreviousStatement(false, null);
+    this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
   }
 };
@@ -52,14 +52,8 @@ Blockly.Blocks['bc_nb_addobj'] = {
 
 Blockly.Blocks['bc_nb_register'] = {
   init: function() {
-    this.appendValueInput("bc_nb_register_observe")
-        .setCheck(null)
-        .setAlign(Blockly.ALIGN_CENTRE)
-        .appendField("NB模块注册   获取observe值");
-    this.appendValueInput("bc_nb_register_discover")
-        .setCheck(null)
-        .setAlign(Blockly.ALIGN_CENTRE)
-        .appendField("获取discover值");
+    this.appendDummyInput()
+        .appendField("NB模块连接OnetNet平台")
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -69,4 +63,79 @@ Blockly.Blocks['bc_nb_register'] = {
   }
 };
 
+Blockly.Blocks['bc_nb_addattr'] = {
+  init: function() {
+    this.appendValueInput("bc_nb_addattr_len")
+        .setCheck(null)
+        .setAlign(Blockly.ALIGN_CENTRE)
+        .appendField("NB模块设置对象属性    属性长度");
+    this.appendValueInput("bc_nb_addattr_attr")
+        .setCheck(null)
+        .setAlign(Blockly.ALIGN_CENTRE)
+        .appendField("属性");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['bc_nb_read'] = {
+  init: function() {
+    this.appendValueInput("bc_nb_read_data")
+        .setCheck(null)
+        .appendField("OneNet平台读取数据");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['bc_nb_write'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("OneNet平台下发数据");
+    this.setInputsInline(true);
+    this.setOutput(true, null);
+    this.setColour(230);
+    
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['bc_nb_notify'] = {
+  init: function() {
+    this.appendValueInput("bc_nb_notify_obj")
+        .setCheck(null)
+        .appendField("NB模块上传数据   对象ID");
+    this.appendValueInput("bc_nb_notify_attr")
+        .setCheck(null)
+        .appendField("属性ID");
+    this.appendValueInput("bc_nb_notify_value")
+        .setCheck(null)
+        .appendField("值");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['bc_nb_del'] = {
+  init: function() {
+    this.setColour(230);
+    this.appendDummyInput()
+        .appendField("NB模块断开连接")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+  }
+};
 //---------------------------

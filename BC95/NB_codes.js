@@ -63,13 +63,148 @@ Blockly.Arduino.bc_nb_init = function() {
   
       'Byte1 = "";\n'+
       
-    '}\n'+
-  'Serial2.print("AT+MIPLCLOSE=0\\r\\n");\n'+
-  'Serial2.print("AT+MIPLDELETE=0\\r\\n");';
+    '}\n';
     var code = '';
     // TODO: Change ORDER_NONE to the correct strength.
     return code;
   };
 
+  Blockly.Arduino.bc_nb_addattr = function(block) {
+    var value_bc_nb_addattr_len = Blockly.Arduino.valueToCode(block, 'bc_nb_addattr_len', Blockly.Arduino.ORDER_ATOMIC);
+    var value_bc_nb_addattr_attr = Blockly.Arduino.valueToCode(block, 'bc_nb_addattr_attr', Blockly.Arduino.ORDER_ATOMIC);
+    // TODO: Assemble JavaScript into code variable.
+    Blockly.Arduino.setups_['setup_bc_nb_addattr_'] =  'Serial2.print("AT+MIPLDISCOVERRSP=0,"+discoverCode+",1,'+value_bc_nb_addattr_len+',\\"'+value_bc_nb_addattr_attr+'\\"");';
+    var code = '';
+    return code;
+  };
+
+  Blockly.Arduino.bc_nb_read = function(block) {
+    var value_bc_nb_read_data = Blockly.Arduino.valueToCode(block, 'bc_nb_read_data', Blockly.Arduino.ORDER_ATOMIC);
+    // TODO: Assemble JavaScript into code variable.
+
+    var code = 'if (Serial2.available() > 0)\n'+
+  '{\n'+
+    'String bc_nb_read = Serial2.readString();\n'+
+    'if (bc_nb_read.indexOf("+MIPLREAD") != -1)\n'+
+    '{\n'+
+      'Serial1.print(bc_nb_read);\n'+
+      'String recv_code;\n'+
+      'String obj_id;\n'+
+      'String obj_attr;\n'+
+      'int seek = 0;\n'+
+
+      'seek = bc_nb_read.indexOf(",");\n'+
+      'bc_nb_read = bc_nb_read.substring(seek+1);\n'+
+
+      'seek = bc_nb_read.indexOf(",");\n'+
+      'recv_code = bc_nb_read.substring(0,seek);\n'+
+      'bc_nb_read = bc_nb_read.substring(seek+1);\n'+
+
+      'seek = bc_nb_read.indexOf(",");\n'+
+      'obj_id = bc_nb_read.substring(0,seek);\n'+
+      'bc_nb_read = bc_nb_read.substring(seek+1);\n'+
+
+      'seek = bc_nb_read.indexOf(",");\n'+
+      'bc_nb_read = bc_nb_read.substring(seek+1);\n'+
+
+      'obj_attr = bc_nb_read;\n'+
+
+      'Serial1.println("msgId: "+recv_code);\n'+
+      'Serial1.println("object id: "+obj_id);\n'+
+      'Serial1.println("attribute id: "+obj_attr);\n'+
+
+      'Serial2.print("AT+MIPLREADRSP=0,"+recv_code+",1,"+obj_id+",0,"+obj_attr+",3,2,'+value_bc_nb_read_data+',0,0\\r\\n");\n'+
+      'delay(100);\n'+
+       'if (Serial2.available() > 0) {\n'+
+        ' Serial1.print(Serial2.readString());\n'+
+       '}\n'+
+    '}\n'+
+  '}\n';
+    return code;
+  };
+
+  Blockly.Arduino.bc_nb_write = function(block) {
+    // TODO: Assemble JavaScript into code variable.
+    Blockly.Arduino.definitions_['define_bc_nb_write'] =  'int writenb() {\n'+
+    'if (Serial2.available() > 0)\n'+
+    '{\n'+
+      'String bc_nb_write = Serial2.readString();\n'+
+      'if (bc_nb_write.indexOf("+MIPLWRITE") != -1)\n'+
+      '{\n'+
+        'Serial1.print(bc_nb_write);\n'+
+        'String write_recv_code;\n'+
+        'String write_obj_id;\n'+
+        'String write_obj_attr;\n'+
+        'String write_value;\n'+
+        'int write_seek = 0;\n'+
+  
+        'write_seek = bc_nb_write.indexOf(",");\n'+
+        'bc_nb_write = bc_nb_write.substring(write_seek+1);\n'+
+  
+        'write_seek = bc_nb_write.indexOf(",");\n'+
+        'write_recv_code = bc_nb_write.substring(0,write_seek);\n'+
+        'bc_nb_write = bc_nb_write.substring(write_seek+1);//13045\n'+
+  
+        'write_seek = bc_nb_write.indexOf(",");\n'+
+        'write_obj_id = bc_nb_write.substring(0,write_seek);\n'+
+        'bc_nb_write = bc_nb_write.substring(write_seek+1);//3311\n'+
+  
+        'write_seek = bc_nb_write.indexOf(",");\n'+
+        'bc_nb_write = bc_nb_write.substring(write_seek+1);//0\n'+
+  
+        'write_seek = bc_nb_write.indexOf(",");\n'+
+        'write_obj_attr = bc_nb_write.substring(0,write_seek);\n'+
+        'bc_nb_write = bc_nb_write.substring(write_seek+1);//5851\n'+
+        
+        'write_seek = bc_nb_write.indexOf(",");\n'+
+        'bc_nb_write = bc_nb_write.substring(write_seek+1);//2\n'+
+  
+        'write_seek = bc_nb_write.indexOf(",");\n'+
+        'write_value = bc_nb_write.substring(0,write_seek);\n'+
+        'bc_nb_write = bc_nb_write.substring(write_seek+1);//5851\n'+
+  
+        'Serial1.println("msgId: "+write_recv_code);\n'+
+        'Serial1.println("object id: "+write_obj_id);\n'+
+        'Serial1.println("attribute id: "+write_obj_attr);\n'+
+        'Serial1.println("write value: "+write_value);\n'+
+  
+        'Serial2.print("AT+MIPLWRITERSP=0,"+write_recv_code+",2\\r\\n");\n'+
+        'delay(100);\n'+
+         'if (Serial2.available() > 0) {\n'+
+           'Serial1.print(Serial2.readString());\n'+
+         '}\n'+
+         'return write_value.toInt();\n'+
+      '}\n'+
+    '}\n'+
+    'return -1;\n'+
+    '}';
+    var code = 'writenb()';
+    // TODO: Change ORDER_NONE to the correct strength.
+    return [code, Blockly.Arduino.ORDER_ATOMIC];
+  };  
+
+  Blockly.Arduino.bc_nb_notify = function(block) {
+    var value_bc_nb_notify_obj = Blockly.Arduino.valueToCode(block, 'bc_nb_notify_obj', Blockly.Arduino.ORDER_ATOMIC);
+    var value_bc_nb_notify_attr = Blockly.Arduino.valueToCode(block, 'bc_nb_notify_attr', Blockly.Arduino.ORDER_ATOMIC);
+    var value_bc_nb_notify_value = Blockly.Arduino.valueToCode(block, 'bc_nb_notify_value', Blockly.Arduino.ORDER_ATOMIC);
+    // TODO: Assemble JavaScript into code variable.
+    var code = 'Serial2.println("AT+MIPLNOTIFY=0,"+observeCode+",'+value_bc_nb_notify_obj+',0,'+value_bc_nb_notify_attr+',3,2,'+value_bc_nb_notify_value+',0,0\\r\\n");\n'+
+    'delay(100);\n'+
+    'if (Serial2.available()>0) {\n'+
+      'String notify_str = Serial2.readString();\n'+
+      'delay(50);\n'+
+      'Serial1.print(notify_str);//ok\n'+
+      'delay(50);\n'+
+      'if(notify_str.indexOf("OK") == -1) {Serial1.println("NB_INIT_ERROR : Notify Resource  Failed !");return ;}notify_str = "";\n'+
+    '}\n';
+    return code;
+  };
+
+  Blockly.Arduino.bc_nb_del = function(block) {
+    var code = 'Serial2.println("AT+MIPLCLOSE=0\\r\\n");\n'+
+    'delay(50);\n'+
+    'Serial2.println("AT+MIPLDELETE=0\\r\\n");\n';
+    return code;
+  };
 //------------------------------------
   
