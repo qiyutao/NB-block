@@ -84,9 +84,15 @@ Blockly.Blocks['bc_nb_addattr'] = {
 
 Blockly.Blocks['bc_nb_read'] = {
   init: function() {
+    this.appendValueInput("bc_nb_read_type")
+        .setCheck(null)
+        .appendField("OneNet平台读取数据  类型");
+        this.appendValueInput("bc_nb_read_len")
+        .setCheck(null)
+        .appendField("类型长度");
     this.appendValueInput("bc_nb_read_data")
         .setCheck(null)
-        .appendField("OneNet平台读取数据");
+        .appendField("读取数据");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);

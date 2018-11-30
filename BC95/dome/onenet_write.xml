@@ -1,0 +1,64 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="variables_set" id="1" x="213" y="13">
+    <field name="VAR">observeCode</field>
+    <value name="VALUE">
+      <block type="math_number" id="2">
+        <field name="NUM">1</field>
+      </block>
+    </value>
+    <next>
+      <block type="variables_set" id="3">
+        <field name="VAR">discoverCode</field>
+        <value name="VALUE">
+          <block type="math_number" id="4">
+            <field name="NUM">1</field>
+          </block>
+        </value>
+        <next>
+          <block type="bc_nb_init" id="5">
+            <next>
+              <block type="bc_nb_addobj" id="6">
+                <value name="bc_nb_addobj_id">
+                  <block type="math_number" id="7">
+                    <field name="NUM">3311</field>
+                  </block>
+                </value>
+                <value name="bc_nb_addobj_num">
+                  <block type="math_number" id="8">
+                    <field name="NUM">1</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="bc_nb_register" id="9">
+                    <next>
+                      <block type="bc_nb_addattr" id="10">
+                        <value name="bc_nb_addattr_len">
+                          <block type="math_number" id="11">
+                            <field name="NUM">4</field>
+                          </block>
+                        </value>
+                        <value name="bc_nb_addattr_attr">
+                          <block type="math_number" id="12">
+                            <field name="NUM">5851</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="variables_set" id="13">
+                            <field name="VAR">item</field>
+                            <value name="VALUE">
+                              <block type="bc_nb_write" id="14"></block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
