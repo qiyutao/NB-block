@@ -1,0 +1,55 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="bc_nb_init" id="1" x="238" y="63">
+    <next>
+      <block type="bc_nb_addobj" id="2">
+        <value name="bc_nb_addobj_id">
+          <block type="math_number" id="3">
+            <field name="NUM">3311</field>
+          </block>
+        </value>
+        <value name="bc_nb_addobj_num">
+          <block type="math_number" id="4">
+            <field name="NUM">1</field>
+          </block>
+        </value>
+        <next>
+          <block type="bc_nb_register" id="5">
+            <next>
+              <block type="bc_nb_addattr" id="6">
+                <value name="bc_nb_addattr_len">
+                  <block type="math_number" id="7">
+                    <field name="NUM">4</field>
+                  </block>
+                </value>
+                <value name="bc_nb_addattr_attr">
+                  <block type="math_number" id="8">
+                    <field name="NUM">5851</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="bc_nb_notify" id="9">
+                    <value name="bc_nb_notify_obj">
+                      <block type="math_number" id="10">
+                        <field name="NUM">3311</field>
+                      </block>
+                    </value>
+                    <value name="bc_nb_notify_attr">
+                      <block type="math_number" id="11">
+                        <field name="NUM">5851</field>
+                      </block>
+                    </value>
+                    <value name="bc_nb_notify_value">
+                      <block type="math_number" id="12">
+                        <field name="NUM">4</field>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
