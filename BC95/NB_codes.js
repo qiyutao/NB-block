@@ -41,9 +41,7 @@ Blockly.Arduino.bc_nb_register = function (block) {
   // TODO: Assemble JavaScript into code variable.
   Blockly.Arduino.definitions_['define_bc_nb_register'] = 'String observeCode;\n' +
   'String discoverCode;\n';
-  Blockly.Arduino.setups_['setup_bc_nb_register_'] = 'String observeCode;\n' +
-    'String discoverCode;\n' +
-    'Serial2.println("AT+MIPLOPEN=0,270,120\\r\\n");\n' +
+  Blockly.Arduino.setups_['setup_bc_nb_register_'] ='Serial2.println("AT+MIPLOPEN=0,270,120\\r\\n");\n' +
     'delay(2000);\n' +
     'if (Serial2.available()>0) {\n' +
     'Byte1 = Serial2.readString();\n' +
